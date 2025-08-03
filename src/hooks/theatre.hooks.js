@@ -5,6 +5,7 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { apiInstance } from "../api";
+import axios from 'axios';
 
 export const useGetAllTheatres = () => {
   const query = useQuery({
@@ -16,6 +17,35 @@ export const useGetAllTheatres = () => {
   });
   return query;
 };
+
+export const useDeleteTheatre = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await apiInstance.delete(`/admin/theatres/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['theatres']);
+    },
+  });
+};
+
+export const useDeleteShow = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await apiInstance.delete(`/admin/shows/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['shows']);
+    },
+  });
+};
+
 
 export const useCreateTheatre = () => {
   const queryClient = useQueryClient();
@@ -47,6 +77,7 @@ export const useCreateTheatre = () => {
   });
   return mutation;
 };
+
 
 export const useCreateTheaterHall = () => {
   const queryClient = useQueryClient();

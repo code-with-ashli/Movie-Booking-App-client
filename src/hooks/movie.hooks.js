@@ -17,6 +17,20 @@ export const useGetAllMovies = () => {
   return query;
 };
 
+export const useDeleteMovie = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (id) => {
+      const { data } = await apiInstance.delete(`/admin/movies/${id}`);
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['movies']);
+    },
+  })
+}
+
 export const useCreateMovie = () => {
   const queryClient = useQueryClient();
   const mutation = useMutation({

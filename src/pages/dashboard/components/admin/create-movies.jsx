@@ -5,12 +5,14 @@ import { Button, Typography } from "@mui/material";
 import { useState } from "react";
 import {
     useCreateMovie,
-  useGetAllMovies,
+    useDeleteMovie,
+    useGetAllMovies,
 } from "../../../../hooks/movie.hooks";
 
 
 const CreateMovieTab = () => {
     const { data: movies } = useGetAllMovies();
+    const {mutate: deleteMovie, isLoading: isDeleting} = useDeleteMovie();
   return (
     <div style={{ display: "flex",  }}>
       <div style={{ width: "50%" }}>
@@ -18,9 +20,35 @@ const CreateMovieTab = () => {
       </div>
       <div style={{ width: "50%", padding: "10px" }}>
         {movies?.map((movie) => (
-          <li style={{listStyle: "none"}} key={movie._id}>
-            <pre>{JSON.stringify(movie, null , 2)}</pre>
-          </li>
+          <div style={{
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              padding: "10px",
+              marginBottom: "10px",
+            }} key={movie._id}
+            >
+               <h4>{movie.title}</h4> 
+               <p>
+                {`${movie.description},
+                ${movie.language},
+                ${movie.durationInMinutes} minutes`}
+               </p>
+               <button onClick={() => deleteMovie(movie._id)}
+                style={{
+                background: "red",
+                color: "white",
+                border: "none",
+                padding: "5px 10px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+                >
+                Delete
+               </button>
+          </div>
+          // <li style={{listStyle: "none"}} key={movie._id}>
+          //   <pre>{JSON.stringify(movie, null , 2)}</pre>
+          // </li>
         ))}
       </div>
     </div>
@@ -65,7 +93,7 @@ function CreateMovieForm() {
 
     return (
         <div>
-          <Typography variant="h3">Sign In</Typography>
+          <Typography variant="h3">Movies</Typography>
           <Box component="form" onSubmit={handleFormSubmit}>
             <div className="form-row">
               <TextField

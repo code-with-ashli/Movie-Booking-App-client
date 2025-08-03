@@ -8,12 +8,25 @@ import {
   useCreateShow,
   useGetAllTheatres,
   useGetTheaterHall,
+  useDeleteShow,
 } from "../../../../hooks/theatre.hooks";
 import { useGetAllMovies } from "../../../../hooks/movie.hooks";
 
+const formatDateTime = (epochMs) => {
+  const date = new Date(epochMs); // your timestamp is already in ms
+  return date.toLocaleString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
+
 const CreateShowTab = () => {
   const [movieId, setMovieId] = useState(null);
-
+  const { mutate: deleteShow, isLoading: isDeleting } = useDeleteShow();
   const { data: shows } = useGetShowsByMovieId(movieId);
 
   return (
@@ -23,9 +36,45 @@ const CreateShowTab = () => {
       </div>
       <div style={{ width: "50%", padding: "10px" }}>
         {shows?.map((show) => (
-          <li style={{ listStyle: "none" }} key={show._id}>
-            <pre>{JSON.stringify(show, null, 2)}</pre>
-          </li>
+          //   <li style={{ listStyle: "none" }} key={show._id}>
+          //   <pre>{JSON.stringify(show, null, 2)}</pre>
+          // </li>
+          <div
+            style={{
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              padding: "10px",
+              marginBottom: "10px",
+            }}
+            key={show._id}
+          >
+            <h4>
+              <strong>Movie:</strong> {show.movieId?.title}
+            </h4>
+            <p>
+              <strong>Theatre:</strong> {show.theatreHallId?.theatreId?.name}
+            </p>
+            <p>{`${formatDateTime(show.startTimeStamp)}, ${formatDateTime(
+              show.endTimeStamp
+            )}`}</p>
+            <button
+              onClick={() => deleteShow(show._id)}
+              style={{
+                background: "red",
+                color: "white",
+                border: "none",
+                padding: "5px 10px",
+                borderRadius: "4px",
+                cursor: "pointer",
+              }}
+            >
+              Delete
+            </button>
+          </div>
+
+          // <li style={{ listStyle: "none" }} key={show._id}>
+          //   <pre>{JSON.stringify(show, null, 2)}</pre>
+          // </li>
         ))}
       </div>
     </div>
@@ -116,7 +165,7 @@ function CreateShowForm({ movieId, setMovieId }) {
             value={startTime}
             onChange={(e) => setStartTime(e.target.value)}
             fullWidth
-            type= "datetime-local"
+            type="datetime-local"
             label="Start Time"
             required
           />

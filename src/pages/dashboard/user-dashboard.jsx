@@ -9,15 +9,15 @@ import moment from "moment";
 import useRazorpay from "react-razorpay";
 import { apiInstance } from "../../api";
 
-const formatEpochToDateTime = (epochSeconds) => {
-  const date = new Date(epochSeconds * 1000); // convert to milliseconds
-  return date.toLocaleString("en-IN", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: true,
+const formatDateTime = (epochMs) => {
+  const date = new Date(epochMs); // your timestamp is already in ms
+  return date.toLocaleString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true
   });
 };
 
@@ -309,9 +309,9 @@ const UserDashboard = () => {
                       )}
                   </Typography> */}
                   <Typography variant="body1">
-                    {formatEpochToDateTime(show.startTimeStamp)} to
+                    {formatDateTime(show.startTimeStamp)} to
                     <br />
-                    {formatEpochToDateTime(show.endTimeStamp)}
+                    {formatDateTime(show.endTimeStamp)}
                   </Typography>
                   <Typography>INR {show.price}</Typography>
                   <Typography>

@@ -11,7 +11,7 @@ import {
 
 const CreateHallTab = () => {
   const [theatreId, setTheatreId] = useState(null);
-
+  const { data: theatres } = useGetAllTheatres();
   const { data: halls } = useGetTheaterHall(theatreId);
 
   return (
@@ -24,9 +24,19 @@ const CreateHallTab = () => {
       </div>
       <div style={{ width: "50%", padding: "10px" }}>
         {halls?.map((hall) => (
-          <li style={{ listStyle: "none" }} key={hall._id}>
-            <pre>{JSON.stringify(hall, null, 2)}</pre>
-          </li>
+
+          <div 
+          style={{
+              border: "1px solid #ccc",
+              borderRadius: "8px",
+              padding: "10px",
+              marginBottom: "10px",
+            }} key={hall._id}>
+            <h4>{`Hall Number: ${hall.number}`}</h4>
+            <p>{`Seating Capacity: ${hall.seatingCapacity}`}</p>
+          </div>
+
+        
         ))}
       </div>
     </div>
