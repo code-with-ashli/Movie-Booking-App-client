@@ -35,6 +35,9 @@ const CreateShowTab = () => {
         <CreateShowForm movieId={movieId} setMovieId={setMovieId} />
       </div>
       <div style={{ width: "50%", padding: "10px" }}>
+        <Typography variant="h3" align="center">
+          Shows List
+        </Typography>
         {shows?.map((show) => (
           //   <li style={{ listStyle: "none" }} key={show._id}>
           //   <pre>{JSON.stringify(show, null, 2)}</pre>
@@ -125,29 +128,47 @@ function CreateShowForm({ movieId, setMovieId }) {
 
   return (
     <div>
-      <select value={movieId} onChange={(e) => setMovieId(e.target.value)}>
-        {movies?.map((e) => (
-          <option key={e._id} value={e._id}>
-            {e.title}
-          </option>
-        ))}
-      </select>
-      <select value={theatreId} onChange={(e) => setTheatreId(e.target.value)}>
-        {theatres?.map((e) => (
-          <option key={e._id} value={e._id}>
-            {e.name}
-          </option>
-        ))}
-      </select>
-      {theatreId && (
-        <select value={hallId} onChange={(e) => setHallId(e.target.value)}>
-          {halls?.map((e) => (
+      <Typography variant="h3" align="center">
+        Create a Show
+      </Typography>
+      <div>
+        <h4>Select a Movie</h4>
+        <select value={movieId} onChange={(e) => setMovieId(e.target.value)}>
+          {movies?.map((e) => (
             <option key={e._id} value={e._id}>
-              {e.number} {`(${e.seatingCapacity})`}
+              {e.title}
             </option>
           ))}
         </select>
-      )}
+      </div>
+
+      <div>
+        <h4>Select a Theatre</h4>
+        <select
+          value={theatreId}
+          onChange={(e) => setTheatreId(e.target.value)}
+        >
+          {theatres?.map((e) => (
+            <option key={e._id} value={e._id}>
+              {e.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+         <h4>Select a Hall</h4>
+        {theatreId && (
+          <select value={hallId} onChange={(e) => setHallId(e.target.value)}>
+            {halls?.map((e) => (
+              <option key={e._id} value={e._id}>
+                {e.number} {`(${e.seatingCapacity})`}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
+
       <Box
         style={{ marginTop: "20px" }}
         component="form"

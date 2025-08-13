@@ -19,6 +19,7 @@ const CreateMovieTab = () => {
         <CreateMovieForm />
       </div>
       <div style={{ width: "50%", padding: "10px" }}>
+        <Typography variant="h3" align="center">Movies List</Typography>
         {movies?.map((movie) => (
           <div style={{
               border: "1px solid #ccc",
@@ -93,7 +94,7 @@ function CreateMovieForm() {
 
     return (
         <div>
-          <Typography variant="h3">Movies</Typography>
+          <Typography variant="h3" align="center">Add a Movies</Typography>
           <Box component="form" onSubmit={handleFormSubmit}>
             <div className="form-row">
               <TextField

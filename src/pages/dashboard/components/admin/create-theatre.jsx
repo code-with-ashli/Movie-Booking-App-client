@@ -16,10 +16,12 @@ const CreateTheatreTab = () => {
   const { mutate: deleteTheatre, isLoading: isDeleting } = useDeleteTheatre();
   return (
     <div style={{ display: "flex" }}>
+       
       <div style={{ width: "50%" }}>
         <CreateTheatreForm />
       </div>
       <div style={{ width: "50%", padding: "10px" }}>
+        <Typography variant="h3" align="center">Theatre List</Typography>
         {theatres?.map((theatre) => (
           <div
             style={{
@@ -82,7 +84,7 @@ function CreateTheatreForm() {
 
   return (
     <div>
-      <Typography variant="h3">Theatre</Typography>
+      <Typography variant="h3" align="center">Add a Theatre</Typography>
       <Box component="form" onSubmit={handleFormSubmit}>
         <div className="form-row">
           <TextField

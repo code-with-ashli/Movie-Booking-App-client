@@ -48,7 +48,7 @@ const SignUpPage = () => {
   return (
     <div className="sign-up-page-container">
       <div>
-        <Typography variant="h2">Sign Up</Typography>
+        <Typography variant="h2" align="center">Sign Up</Typography>
         <Box component="form" onSubmit={handleFormSubmit}>
           <div className="form-row">
             <TextField

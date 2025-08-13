@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 
 import { Button, Typography } from "@mui/material";
-import { useState, useEffect  } from "react";
+import { useState, useEffect } from "react";
 import {
   useCreateTheaterHall,
   useGetAllTheatres,
@@ -23,20 +23,22 @@ const CreateHallTab = () => {
         />
       </div>
       <div style={{ width: "50%", padding: "10px" }}>
+        <Typography variant="h3" align="center">
+          Hall List
+        </Typography>
         {halls?.map((hall) => (
-
-          <div 
-          style={{
+          <div
+            style={{
               border: "1px solid #ccc",
               borderRadius: "8px",
               padding: "10px",
               marginBottom: "10px",
-            }} key={hall._id}>
+            }}
+            key={hall._id}
+          >
             <h4>{`Hall Number: ${hall.number}`}</h4>
             <p>{`Seating Capacity: ${hall.seatingCapacity}`}</p>
           </div>
-
-        
         ))}
       </div>
     </div>
@@ -70,13 +72,23 @@ function CreateTheatreHallForm({ theatreId, setTheatreId }) {
 
   return (
     <div>
-      <select value={theatreId} onChange={(e) => setTheatreId(e.target.value)}>
-        {theatres?.map((e) => (
-          <option key={e._id} value={e._id}>
-            {e.name}
-          </option>
-        ))}
-      </select>
+      <Typography variant="h3" align="center">
+        Add a Hall
+      </Typography>
+      <div>
+        <h5>Select a Theatre</h5>
+        <select
+          value={theatreId}
+          onChange={(e) => setTheatreId(e.target.value)}
+        >
+          {theatres?.map((e) => (
+            <option key={e._id} value={e._id}>
+              {e.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <Box
         style={{ marginTop: "20px" }}
         component="form"

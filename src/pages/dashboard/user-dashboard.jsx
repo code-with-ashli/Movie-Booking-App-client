@@ -47,7 +47,7 @@ const UserDashboard = () => {
     const order = data.order;
 
     const options = {
-      key: "rzp_test_SOzicN4cTTzIuG",
+      key: "rzp_test_Fo95E8iL2BunUH",
       amount: order.amount,
       currency: order.currency,
       name: "BookingMyShow",
@@ -253,12 +253,13 @@ const UserDashboard = () => {
   // );
   return (
     <div className="user_dashboard_container">
-      <h1 style={{ marginBottom: "20px" }}>Hi {user.firstname}</h1>
+      <h1 style={{ marginBottom: "20px" }}>Hi, {user.firstname}</h1>
 
       <div className="dashboard_grid">
         {/* Movie List Column */}
         <div className="dashboard_column">
-          <h2>Movies</h2>
+          <Typography variant="h3" align="center">Movies</Typography>
+
           {movies?.map((movie) => (
             <div
               className={`movie_card ${
@@ -283,8 +284,7 @@ const UserDashboard = () => {
 
         {/* Shows Column */}
         <div className="dashboard_column">
-          <h2>Shows</h2>
-
+           <Typography variant="h3" align="center">Shows</Typography>
           {shows?.map((show) => (
             <div
               className={`show_card ${
@@ -327,6 +327,7 @@ const UserDashboard = () => {
 
         {/* Seats Column */}
         <div className="dashboard_column seats_side">
+         <Typography variant="h3" align="center">Hall Map</Typography><br />
           {showObj?.theatreHallId?.seatingCapacity && (
             <>
               <div className="screen">SCREEN</div>
